@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Sincronizar o ambiente
+        run: uv sync --locked
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Formatacao
+        run: uv run ruff format --check .
+
+      - name: Type check
+        run: uv run mypy src
+
+      - name: Testes com cobertura
+        run: uv run pytest --cov=messy_csv --cov-report=term-missing
+
+      - name: Cobertura minima em contract.py e clean/
+        run: >
+          uv run coverage report
+          --include="*/messy_csv/contract.py,*/messy_csv/clean/*"
+          --fail-under=90
