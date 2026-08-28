@@ -1,0 +1,36 @@
+[project]
+name = "messy-csv"
+version = "0.1.0"
+description = "Ciclo completo de qualidade de dados: gerar sujeira, medir, limpar e publicar a prova"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "polars>=1.20",
+    "jinja2>=3.1",
+]
+
+[project.scripts]
+messy-csv = "messy_csv.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "mypy>=1.14",
+    "ruff>=0.9",
+    "pre-commit>=4.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/messy_csv"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["src/messy_csv"]
