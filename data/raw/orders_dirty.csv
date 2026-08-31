@@ -300,12 +300,12 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
   299,2023-04-20,Carla Klein,Livros,"R$ 811,68"
 300,  2023-08-30,Carla Teixeira,Eletrônicos,"R$ 4.112,83"
 301,04/03/2023,Eduarda Teixeira,Eletrônicos,"1.471,32"
-302,Mar  21 2024,Lucas Carvalho,Esporte,$ 1484.67
+302,Mar  21 2024,Lucas Carvalho,Esporte,$ 1484.67  
 303,2024-12-20,Karina Nogueira,Livros,"R$ 957,10"
 304,2023-01-17,Paulo Oliveira,vestuario,"3.482,32"
 305,2023-01-08,Henrique Ribeiro  ,Esporte,-
 306,2023-13-14,Carla Ribeiro  ,eletronicos,"2.905,93"
-307,2023-10-29,Bruno Vasconcelos,ESPORTE,USD 276.92
+307,2023-10-29,Bruno Vasconcelos,ESPORTE,USD 276.92  
 308,09/10/2023,Ana Duarte,  Esporte,"893,23"
 309,22/05/2024,Nuno Nogueira  ,Livros,"R$ 4.211,47"
 310,29/06/2024,Mariana Queiroz,Esporte,""
@@ -330,7 +330,7 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
 329,2024-04-26,Rafael Barbosa,Livros,"R$ 2.272,65"
 330,2023-13-17,João Ferreira,Esporte,n/a
 331,02/01/2023,Carla Nogueira,Casa,"3.495,59"
-332,2024-11-21,Bruno Duarte,Livros,$ 2802.17
+332,2024-11-21,Bruno Duarte,Livros,$ 2802.17  
 333,20/12/2024,Henrique Lopes,Casa,$ 1876.18
 334,2024-01-12,Carla Gomes,LIVRO,"R$ 4.783,04"
   335,2024-11-29,Eduarda Queiroz,Livros,-
@@ -342,7 +342,7 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
 341,2023-12-26,Olívia Santos,Livros,"835,43"
 342,2024-06-21,Carla Teixeira,Eletrônico,"3.556,29  "
 343,2024-07-26,Henrique Almeida  ,vestuario,"R$ 1.452,33"
-344,2024-05-07,Isabela Queiroz,Eletrônicos,USD 1312.16
+344,2024-05-07,Isabela Queiroz,Eletrônicos,USD 1312.16  
 345,Dec 31 2023,João Ribeiro,Eletrônicos,"490,47"
 346,  09/04/2023,Lucas Esteves,"","R$ 2.434,26"
 347,2024-12-07,Rafael Santos,Eletrônicos,$ 673.32
@@ -357,7 +357,7 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
 356,2024-07-09,Sofia Santos,"","  R$ 4.402,13"
 357,Nov 07 2023,Felipe Queiroz,Casa,USD 3380.91
 358,2024-01-22,Lucas Klein,Eletrônicos,"4.050,75"
-359,2023-09-08,João Teixeira,Eletrônicos,$ 2700.73
+359,2023-09-08,João Teixeira,Eletrônicos,$ 2700.73  
 360,2024-13-22,Karina Teixeira,livraria,"4.060,23"
 361  ,2024-07-02,Isabela Barbosa,Esporte,"477,77"
 362,2023-11-06,João Oliveira,Casa e Decoração,"3.363,67"
@@ -524,9 +524,9 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
   523,2024-01-06,Paulo  Gomes,diversos,"1.363,50"
 524,Jul 08 2023,Carla Oliveira,Casa e Decoração,"2.686,24"
 525,Jul 23 2023,Tiago Vasconcelos,Casa e Decoração,"1.595,33"
-526,16/10/2024,Diego Barbosa,Moda  ,$ 1899.79
+526,16/10/2024,Diego Barbosa,Moda  ,$ 1899.79  
 527,Dec 17 2024,Olívia Oliveira,Casa,"1.692,01"
-528,27/11/2024,João Vasconcelos,Eletrônicos,USD 3254.45
+528,27/11/2024,João Vasconcelos,Eletrônicos,USD 3254.45  
 529,14/11/2024,Nuno Gomes,Livros,"R$ 4.752,79"
 530,  2023-08-18 10:30:00,Isabela Jesus,Livros,""
 531,06/09/2024,Felipe Teixeira,Moda,"R$ 1.978,27"
@@ -549,7 +549,7 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
 548  ,2023-04-20,Henrique Almeida,vestuario,"1.342,24"
 549,2023-02-20,Nuno Gomes,  LIVRO,"2.178,67"
 550,2023-10-10,  Vitória Nogueira,Eletrônico,USD 1033.52
-551,2024-12-05,Karina  Carvalho,Casa,$ 2382.98
+551,2024-12-05,Karina  Carvalho,Casa,$ 2382.98  
 552,2024-05-15,Paulo Duarte  ,diversos,"4.179,24"
 553,2024-07-12,Paulo Jesus,Eletrônicos,"2.598,23"
 554,2024-02-25,Eduarda Martins  ,Moda,"R$ 1.047,13"
@@ -604,7 +604,7 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
 603,2024-09-11,Ana Nogueira,Casa,"3.280,87"
 604  ,18/01/2024,Gabriela Santos,eletronicos,"2.516,92"
 605,2024-01-22,Eduarda Jesus,eletro,-
-606,2023-01-24,Olívia Gomes,Esporte,USD 4834.12
+606,2023-01-24,Olívia Gomes,Esporte,USD 4834.12  
 607,2024-07-13 10:30:00,Olívia Henriques,  Eletrônicos,"2.823,90"
 608,2023-03-27,Vitória Queiroz,Esporte,"2.070,59"
 609,2024-05-15,Karina Henriques,Livros,"R$ 425,37"
@@ -672,7 +672,7 @@ ORD-1023,2024-02-04,Nuno Santos,Esporte,"R$ 1.378,87"
 671,2023-07-15  ,Carla Ribeiro,Casa,$ 1912.10
 672,2024-12-19,Mariana  Queiroz,"","R$ 4.487,80"
 673,04/03/2023,Gabriela Klein,Livros,$ 2602.06
-674  ,2024-02-18,Isabela Vasconcelos,Eletrônicos,USD 4361.82
+674  ,2024-02-18,Isabela Vasconcelos,Eletrônicos,USD 4361.82  
 675,2023-03-09,Paulo Pereira,Esporte,"R$ 23,49"
 676,  2024-05-19,Tiago Gomes,esporte,$ 491.86
 677,2024-08-27,Tiago Jesus,Moda,USD 3686.56
@@ -853,7 +853,7 @@ ORD-1023,2024-08-04,Carla Ferreira,Esporte,"502,70"
 852,06/02/2024,Lucas Esteves,Eletrônicos,USD 2638.71
 853,2024-02-22,Felipe Gomes,esporte,"R$ 2.102,50"
 854,11/01/2024,Karina Henriques,Livros,"R$ 2.605,74"
-855,2023-07-28,Mariana Vasconcelos,Eletrônicos,$ 4701.79
+855,2023-07-28,Mariana Vasconcelos,Eletrônicos,$ 4701.79  
 856  ,2024-08-08,Paulo  Oliveira,Moda,"1.465,83"
 857,  2024-11-14,Rafael Esteves,Modas,$ 530.13
 858,2024-08-10,Ana Pereira,Esporte,"2.871,87"
@@ -865,7 +865,7 @@ ORD-1023,2024-08-04,Carla Ferreira,Esporte,"502,70"
 864,15/09/2023,Isabela Nogueira,Moda,"1.373,72"
 865,2024-02-05,Mariana Carvalho,Eletrônicos,"  393,62"
 866,2024-10-25,João Vasconcelos,Casa e Decoração  ,"2.618,03"
-867,2024-05-22,Vitória Klein,Eletrônicos,USD 2027.57
+867,2024-05-22,Vitória Klein,Eletrônicos,USD 2027.57  
   868,29/01/2024,Felipe Teixeira,  Esportes,n/a
   869,  25/06/2023,Mariana Duarte,Eletrônicos,"4.539,12"
 870,2024-04-23,Tiago Martins,moda  ,"1.548,97"
@@ -1102,7 +1102,7 @@ ORD-1023,2023-03-22  10:30:00,Vitória Gomes,  Casa,"R$ 3.484,17"
 1101  ,2023-01-29 10:30:00,Sofia Queiroz,Livros,"R$  1.039,05"
   1102,2024-03-05,Sofia Vasconcelos,diversos,"R$ 513,91"
 1103  ,2023-02-05,Karina Henriques,  Livros,"2.057,70"
-1104,2024-07-30 10:30:00,Ana Pereira,livros,$ 485.57
+1104,2024-07-30 10:30:00,Ana Pereira,livros,$ 485.57  
 1105,2023-01-26,Isabela Lopes,Casa  ,"R$ 572,38"
 1106,2023-13-29,João  Klein,MODA,"R$ 737,24"
 1107,2024-04-01,Paulo Ferreira,ELETRONICOS,"R$ 1.592,33"
@@ -1207,7 +1207,7 @@ ORD-1023,2023-03-22  10:30:00,Vitória Gomes,  Casa,"R$ 3.484,17"
 1206,2024-10-12,Paulo Esteves,misc,"R$ 4.166,61"
 1207,2024-10-26 10:30:00,Rafael Ferreira,vestuario,"R$ 4.712,25"
 1208,12/07/2024,Bruno  Martins,Moda,"1.244,78"
-1209,29/10/2024,João Almeida,Casa,$ 1142.88
+1209,29/10/2024,João Almeida,Casa,$ 1142.88  
 1210,2023-06-23,Lucas Barbosa,Eletrônicos,USD 243.90
 1211,2024-04-15,João Ferreira,Casa e Decoração,"R$ 3.902,26"
 1212,Jan  06 2023,Paulo Oliveira,Esportes,"3.445,83"
@@ -1323,7 +1323,7 @@ ORD-1023,2023-03-22  10:30:00,Vitória Gomes,  Casa,"R$ 3.484,17"
 1322,2023-03-31,Sofia Ferreira,Casa,"R$ 1.924,16"
 1323,2023-05-05  10:30:00,Tiago Ferreira,Casa,"R$ 940,77"
 1324,28/03/2023,Ana Barbosa,Moda,"R$  1.895,94"
-1325,2023-11-13 10:30:00,"",Esporte,$ 3972.92
+1325,2023-11-13 10:30:00,"",Esporte,$ 3972.92  
 1326,2024-07-01,João Lopes,Livros,"R$ 3.915,41"
 1327,25/05/2024,Nuno Oliveira,Casa e Decoração,"R$ 352,98"
 1328,01/10/2024,Eduarda Henriques,Eletrônicos,"R$ 2.219,66"
@@ -2020,7 +2020,7 @@ ORD-1023,Jul 04 2024,Vitória Barbosa,Modas,"1.244,21"
 2019,2024-12-22,Sofia  Santos,Eletrônicos,USD 4850.24
 2020,03/08/2023,Mariana Pereira,livraria  ,"2.370,78"
 2021,2023-09-22,Diego Klein,Livros,"1.515,86"
-2022,2024-09-10,Bruno Duarte,Casa,USD 578.64
+2022,2024-09-10,Bruno Duarte,Casa,USD 578.64  
 2023,21/05/2024,Lucas Barbosa,ESPORTE  ,"R$ 1.063,11"
 2024,2024-10-02,Lucas Nogueira,Moda,"1.235,85"
 2025,Dec 12 2023,Rafael Esteves,  Esporte,"R$ 847,37"
@@ -2193,7 +2193,7 @@ ORD-1023,2024-04-04,Tiago Klein  ,casa,"1.822,23"
 2192,  2024-06-11 10:30:00,Lucas Henriques,Casa,"4.251,30"
 2193,Dec 15 2024,Henrique Carvalho,Eletrônicos,"4.945,27"
 2194,2023-02-28,Paulo Vasconcelos,livros,"R$ 1.071,52"
-2195,2023-02-16,Diego Nogueira,Casa,$ 2168.87
+2195,2023-02-16,Diego Nogueira,Casa,$ 2168.87  
 2196,12/08/2024,Ana Lopes,Moda,"R$ 3.185,29  "
 2197,11/09/2024,Henrique Lopes,casa_decoracao,"4.014,27"
 2198,2024-04-02 10:30:00,Sofia Carvalho,livros,n/a
@@ -2334,11 +2334,11 @@ ORD-1023,23/02/2023,Paulo Barbosa,Esporte,"2.215,33"
 2333,2023-08-19,Bruno Almeida,Eletrônicos,"R$  1.632,40"
 2334,2023-01-31,Sofia Carvalho,Casa e Decoração,"R$ 4.328,35"
 2335,2023-02-19,Tiago Santos,"","3.454,95  "
-2336,2023-11-30,  Bruno Klein,esporte,USD 4473.03
+2336,2023-11-30,  Bruno Klein,esporte,USD 4473.03  
 2337,2024-08-23,Eduarda Klein,Livros,"2.843,36"
   2338,2024-01-06,Gabriela Henriques,Esporte,"157,64"
 2339,02/10/2023,Ana Almeida,Casa,"4.212,98"
-2340,2023-04-19,Vitória Almeida  ,vestuario,USD 2620.49
+2340,2023-04-19,Vitória Almeida  ,vestuario,USD 2620.49  
 2341,2024-13-15,Mariana Pereira,Casa,$ 1968.98
 2342,21/12/2023,Sofia Queiroz,moda,"R$ 2.786,83"
 2343,01/04/2023,Eduarda Queiroz,Esporte,"R$  340,69"
@@ -2509,7 +2509,7 @@ ORD-1023,2023-02-25,Henrique Nogueira,outros,"R$ 3.611,43"
 2508,29/12/2023,Eduarda Ferreira,Eletrônicos,"R$ 198,04"
   2509,2024-01-12,Karina  Carvalho,vestuario  ,"R$ 700,19"
 1969,  2024-10-02,Lucas Teixeira,Casa,""
-359,2023-09-08,João Teixeira,"",$ 2700.73
+359,2023-09-08,João Teixeira,"",$ 2700.73  
 2512,2023-05-25 10:30:00,Felipe Pereira,livros,""
 2513,04/07/2023,João Oliveira,Casa,"R$ 2.946,38"
 2514,2024-08-22,Isabela Martins,Esporte,USD 2714.07
@@ -2928,7 +2928,7 @@ ORD-1023,2023-02-25,Henrique Nogueira,outros,"R$ 3.611,43"
 2927,2023-12-21,Paulo Nogueira,MODA,"  2.203,92"
 2928,27/03/2023,João Henriques,Casa,"R$ 4.465,80"
 2929,2023-06-12,Rafael Lopes,livros,"4.869,35"
-2930  ,2024-04-11,Ana  Ribeiro,Moda,$ 3571.72
+2930  ,2024-04-11,Ana  Ribeiro,Moda,$ 3571.72  
 2931,2023-10-02,Vitória Teixeira,Moda,"  0,00"
 2932,2024-07-22,Mariana Barbosa,Moda,"R$ 3.176,61"
 2933,20/12/2023,Karina Carvalho,Moda,"1.714,11"
@@ -2951,7 +2951,7 @@ ORD-1023,2023-02-25,Henrique Nogueira,outros,"R$ 3.611,43"
 2950,2023-02-22,Sofia Barbosa,Eletrônicos,"2.977,33"
 2951,30/08/2024,Eduarda Gomes,Casa  ,  USD 800.71
 2952,Jun 23 2023,Sofia Esteves,Livros,"R$ 4.502,36"
-2953,2023-07-02,João Barbosa,Livros,-
+2953,2023-07-02,João Barbosa,Livros,-  
 2954,2024-01-26,"",  Esporte,"R$ 4.776,98"
 2955,2024-01-28,Ana Teixeira,Livros,"565,57"
 1711,15/02/2024,"",Esporte,""
@@ -3084,7 +3084,7 @@ ORD-1023,2024-06-12,Eduarda Henriques,Esporte,"955,53"
 3083,2023-02-21,Henrique Ribeiro,Moda,"R$ 4.600,05"
 3084,11/08/2023,Nuno Lopes,Casa,"R$ 4.955,55"
 3085,21/07/2024,Henrique Almeida,Livros,"4.655,11"
-3086,2024-12-28,Sofia Pereira,Esportes,n/a
+3086,2024-12-28,Sofia Pereira,Esportes,n/a  
   3087,02/10/2024,Sofia Ribeiro,Esporte,USD 2782.35
 659,Aug 04 2023,Eduarda Lopes,"","802,28"
 3089,18/12/2023,  Karina Esteves,Esporte,"3.030,45"
@@ -3163,7 +3163,7 @@ ORD-1023,2024-06-12,Eduarda Henriques,Esporte,"955,53"
 3162,2023-04-25,João Nogueira,livros,"R$ 1.046,21"
 3163,2024-02-18,Karina Queiroz,Casa,"R$ 2.462,15"
 3164,2023-10-14,Vitória Gomes,ESPORTE,"1.412,21"
-3165,2023-04-18,João Esteves,LIVRO,USD 2636.83
+3165,2023-04-18,João Esteves,LIVRO,USD 2636.83  
 3166,2024-02-01,Felipe Esteves,Livros  ,"2.956,13"
 3167,2024-03-29 10:30:00,Mariana Teixeira,Livros  ,USD 2005.47
 3168,2024-06-27,Felipe Gomes,Esporte,"3.778,02"
@@ -3279,7 +3279,7 @@ ORD-1023,2024-06-12,Eduarda Henriques,Esporte,"955,53"
 3278,2023-08-05,Henrique Pereira,Eletrônicos,"R$ 515,60"
 3279,2024-11-30,Felipe Lopes,Moda,"R$ 2.860,68"
 3280,2023-10-21,Sofia Ribeiro,Livros,"611,60"
-3281,2024-05-23,Paulo Teixeira,Eletrônicos,USD 2737.49
+3281,2024-05-23,Paulo Teixeira,Eletrônicos,USD 2737.49  
 3282,05/07/2023,Vitória Nogueira,LIVRO,"  4.434,31"
 3283,2023-11-12,Felipe Pereira,Casa,USD 1393.79
 1185  ,2023-03-25,"",Esporte,"3.387,03"
@@ -3911,7 +3911,7 @@ ORD-1023,2024-10-13,Henrique Almeida,ELETRONICOS,"R$ 3.674,59"
 3910,02/12/2024,Lucas Barbosa,  Livros,"R$ 1.005,71"
 3911,2023-03-13 10:30:00,João Nogueira,Esporte,"1.043,68"
 3912,31/01/2023  ,Carla Pereira,Esporte,$ 4820.12
-3913,2024-05-20 10:30:00,Carla Pereira,Esporte,-
+3913,2024-05-20 10:30:00,Carla Pereira,Esporte,-  
 3914,2024-04-20,Ana Oliveira,Casa,"2.372,90"
 3915,29/08/2024,Felipe Esteves,Eletrônicos,"R$ 62,25"
   3916,2024-05-15,"",Esporte,"R$ 1.138,91"
@@ -4005,7 +4005,7 @@ ORD-1023,2024-10-13,Henrique Almeida,ELETRONICOS,"R$ 3.674,59"
 4004,15/01/2023,Nuno Jesus,livraria,"3.973,73"
 4005,24/06/2023,Tiago Oliveira,Esporte,"R$ 73,90  "
   4006,2023-06-22,Vitória Jesus,ESPORTE,"R$ 974,46"
-4007,2024-03-25,Olívia Ferreira,Livros,n/a
+4007,2024-03-25,Olívia Ferreira,Livros,n/a  
 4008,2023-07-04,Bruno Klein  ,Eletrônicos,"R$ 501,97"
 4009,2023-01-23,Ana Jesus,vestuario,"2.477,67"
 4010,2024-02-01,Diego Lopes,casa,"4.632,20"
@@ -4106,7 +4106,7 @@ ORD-1023,2023-01-06,Lucas Almeida,  casa_decoracao,"R$ 2.456,09"
 4105,2023-02-23,Karina Almeida,Eletrônicos,"R$ 2.804,36"
 391,22/01/2023,"",Moda,"4.609,31"
 4107,2023-03-11,Nuno Carvalho,Esporte,USD 1097.01
-4108,Jun 14 2023,Nuno Almeida,Livros  ,USD 2245.65
+4108,Jun 14 2023,Nuno Almeida,Livros  ,USD 2245.65  
 4109,2024-01-15 10:30:00,Vitória Esteves,Modas,"2.160,13"
 4110,2023-05-24  ,Olívia Jesus,Esporte  ,"R$ 2.480,68"
 4111,2023-05-25,Ana Santos  ,Eletrônico,"2.262,20"
@@ -4161,7 +4161,7 @@ ORD-1023,2023-01-06,Lucas Almeida,  casa_decoracao,"R$ 2.456,09"
 1759,30/09/2023,"",MODA,"3.922,47"
 4161,Jun 30 2023,Eduarda Vasconcelos,Casa,"2.860,39"
 4162,2024-11-08,Eduarda Ribeiro,Eletrônicos,"R$ 1.659,84"
-4163,  2023-11-16,Vitória Jesus,moda,$ 550.27
+4163,  2023-11-16,Vitória Jesus,moda,$ 550.27  
 4164,15/04/2024,Isabela Henriques,"","4.528,75"
 4165,2023-12-25,Carla Martins,  Esporte,USD 1189.13
 4166,Aug 03 2024,Tiago Almeida,Livros,"2.854,43"
@@ -4312,7 +4312,7 @@ ORD-1023,2023-01-06,Lucas Almeida,  casa_decoracao,"R$ 2.456,09"
 4311,2023-07-15,Isabela Teixeira,Eletrônicos,"2.263,00"
 4312,2024-01-22,Tiago Duarte,diversos,"2.223,97"
 4313,2019-09-10,Carla Vasconcelos,Esportes  ,"R$ 812,89"
-4314,2024-06-26  ,Karina Lopes,Eletrônico,USD 4494.00
+4314,2024-06-26  ,Karina Lopes,Eletrônico,USD 4494.00  
 4315,2023-07-22 10:30:00,João Ferreira,Livros,"1.751,77"
 4316,2023-10-03,Karina Vasconcelos,Esporte,"R$ 3.949,62"
 4317,  2024-03-12,Felipe Queiroz,vestuario,"416,17"
@@ -4476,7 +4476,7 @@ ORD-1023,2023-01-06,Lucas Almeida,  casa_decoracao,"R$ 2.456,09"
 4475,08/02/2024,Paulo Duarte,Moda,"3.696,46"
 4476,2023-02-04,Ana Ferreira,ELETRONICOS,"4.935,02"
 4477,2023-09-28,Bruno Ferreira,eletronicos,"4.085,89"
-4478,2024-08-31,Bruno Martins,diversos,$ 4333.26
+4478,2024-08-31,Bruno Martins,diversos,$ 4333.26  
 4479,2024-04-19,Ana Ribeiro,Esporte,"4.602,31"
 4480,2024-08-18,Felipe Queiroz,Livros,"R$ 171,69"
 4481,Feb 29 2024  ,Olívia Carvalho,Moda,USD 3398.28
@@ -4542,7 +4542,7 @@ ORD-1023,2023-01-06,Lucas Almeida,  casa_decoracao,"R$ 2.456,09"
 4541,2023-09-29,Henrique Pereira,Moda,"R$ 4.617,48"
 4542,2023-02-27 10:30:00,Diego Ribeiro,Casa e Decoração,"1.412,70"
 4543,25/11/2023,Olívia Ferreira,Casa,"850,81"
-4544,2024-09-28,Tiago Teixeira,casa,USD 4013.76
+4544,2024-09-28,Tiago Teixeira,casa,USD 4013.76  
 4545,2023-11-18,Gabriela Ribeiro,Livros,"R$ 2.619,46"
 4546,2023-06-03,Diego Ribeiro,  Casa,"R$ 3.528,87"
 1596,Dec 03 2023,"",Livros,"R$ 4.414,03"
@@ -4806,7 +4806,7 @@ ORD-1023,2024-01-29,Rafael Carvalho,Moda,"3.376,13"
 4805,2023-01-04,Diego Martins,Esporte,"R$ 1.504,99"
 770  ,2024-09-05,"",Eletrônicos,"3.888,90"
 4807,2023-10-14,João Esteves,Casa,"843,41"
-4808,2023-06-06  ,Lucas Santos,casa_decoracao,USD 3611.86
+4808,2023-06-06  ,Lucas Santos,casa_decoracao,USD 3611.86  
 4809,Jul 12 2023,Olívia Ribeiro,Casa,USD 61.01
 4810,2024-09-01,Lucas Teixeira,Livros  ,"235,04"
 4811,08/04/2024,"",Casa e Decoração,USD 1751.91
@@ -4817,7 +4817,7 @@ ORD-1023,2024-01-29,Rafael Carvalho,Moda,"3.376,13"
 4816,Aug 05 2023,Carla Barbosa,Eletrônicos  ,"3.901,67"
 4817,2023-06-01,Gabriela Duarte,casa_decoracao,USD 3590.45
 4818,30/06/2023,Vitória Queiroz,LIVRO  ,"1.361,08"
-4819,  2024-11-13,Carla Vasconcelos,Moda,USD 204.58
+4819,  2024-11-13,Carla Vasconcelos,Moda,USD 204.58  
 4820,2024-03-26,Paulo Queiroz,Casa,"R$ 3.177,23"
 4821,2023-12-13,Carla Vasconcelos,Livros,"R$ 2.039,11"
 4822,  2023-05-01,Lucas Gomes,Livros  ,"3.926,11"
@@ -4962,7 +4962,7 @@ ORD-1023,2024-01-29,Rafael Carvalho,Moda,"3.376,13"
 4961,2024-13-26,Gabriela  Carvalho,Moda,"1.212,33"
 4962,2023-07-30 10:30:00,Eduarda Ferreira,Casa,"R$ 4.985,24"
 691,2024-05-26,"",Moda,"R$ 470,17"
-4964,  17/03/2023,Isabela Pereira,"",USD 743.71
+4964,  17/03/2023,Isabela Pereira,"",USD 743.71  
 4965,06/06/2023,Carla Pereira,Eletrônicos  ,"R$ 1.435,04"
 4966  ,23/07/2024,Nuno Gomes,moda,"R$ 1.104,44"
 4967,2023-09-07,Nuno Carvalho,Eletrônicos,"218,43"
