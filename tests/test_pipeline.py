@@ -167,3 +167,14 @@ def test_rodar_duas_vezes_produz_o_mesmo_artefato(tmp_path: Path) -> None:
     pipeline.run(TODAY, raw_path=bruto, clean_path=segundo, rejects_path=tmp_path / "rb.csv")
 
     assert primeiro.read_bytes() == segundo.read_bytes()
+
+
+def test_artefatos_versionados_batem_com_o_pipeline(tmp_path: Path) -> None:
+    """Os CSVs commitados sao a vitrine: se divergirem do codigo, a vitrine mente."""
+    limpo = tmp_path / "orders.csv"
+    rejeitos = tmp_path / "rejects.csv"
+
+    pipeline.run(TODAY, clean_path=limpo, rejects_path=rejeitos)
+
+    assert limpo.read_bytes() == pipeline.CLEAN_PATH.read_bytes()
+    assert rejeitos.read_bytes() == pipeline.REJECTS_PATH.read_bytes()

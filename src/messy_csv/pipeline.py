@@ -51,7 +51,8 @@ def write_outputs(
 ) -> None:
     for caminho, frame in ((clean_path, accepted), (rejects_path, rejected)):
         caminho.parent.mkdir(parents=True, exist_ok=True)
-        frame.write_csv(caminho, line_terminator="\n")
+        # float_precision fixa as duas casas: coluna monetaria nao alterna 1919.0 e 481.69.
+        frame.write_csv(caminho, line_terminator="\n", float_precision=2)
 
 
 def run(
