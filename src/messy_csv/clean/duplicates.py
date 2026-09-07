@@ -34,8 +34,8 @@ def apply(df: pl.DataFrame) -> pl.DataFrame:
     ordenado = com_id.sort("_nulls", "source_index")
 
     marcado = ordenado.with_columns(
-        pl.when(pl.col("order_id").is_null() | (pl.col("order_id") <= 0))
         # Id invalido nao forma grupo: "0" sobrevive ao cast e juntaria pedidos sem relacao.
+        pl.when(pl.col("order_id").is_null() | (pl.col("order_id") <= 0))
         .then(pl.lit(False))
         .otherwise(pl.col("source_index").cum_count().over("order_id") > 1)
         .alias("is_duplicate_loser")
