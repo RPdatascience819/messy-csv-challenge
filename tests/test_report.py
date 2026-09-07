@@ -176,3 +176,20 @@ def test_write_grava_utf8_e_devolve_o_caminho(dados: report.ReportData, tmp_path
 
     assert destino.exists()
     assert destino.read_text(encoding="utf-8").startswith("<!doctype html>")
+
+
+def test_cada_numero_esta_no_card_certo(dados: report.ReportData, html: str) -> None:
+    """Presenca do numero nao basta: trocar antes por depois passaria nos outros testes."""
+    pares = dict(re.findall(r"<h3>(Score \w+)</h3>\s*<b[^>]*>([\d.]+)</b>", html))
+
+    assert pares["Score antes"] == f"{dados.comparison.before.score:.1f}"
+    assert pares["Score depois"] == f"{dados.comparison.after.score:.1f}"
+
+    for d in dados.comparison.dimensions:
+        bloco = re.search(
+            rf"<h3>{re.escape(d.label)}</h3>\s*<del>([\d.]+)%</del>\s*→\s*<ins>([\d.]+)%</ins>",
+            html,
+        )
+        assert bloco is not None, d.label
+        assert bloco.group(1) == f"{d.before * 100:.1f}"
+        assert bloco.group(2) == f"{d.after * 100:.1f}"
