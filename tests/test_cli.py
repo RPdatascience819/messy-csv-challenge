@@ -151,3 +151,17 @@ def test_data_padrao_e_hoje() -> None:
     args = cli.build_parser().parse_args(["generate"])
 
     assert args.today is None or args.today == dt.date.today()
+
+
+def test_clean_imprime_as_contagens_no_lugar_certo(
+    dados: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A linha que a pessoa le ao rodar o comando: trocar os dois numeros nao quebrava nada."""
+    cli.main(_args(dados, tmp_path / "docs", "generate"))
+    capsys.readouterr()
+
+    cli.main(_args(dados, tmp_path / "docs", "clean"))
+
+    saida = capsys.readouterr().out
+    assert "aprovados: 4237" in saida
+    assert "quarentena: 763" in saida

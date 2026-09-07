@@ -184,6 +184,6 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     try:
         return int(args.handler(args))
-    except (FileNotFoundError, pl.exceptions.ComputeError) as erro:
+    except (FileNotFoundError, pl.exceptions.PolarsError) as erro:
         print(f"arquivo nao encontrado ou ilegivel: {erro}", file=sys.stderr)
         return 2
