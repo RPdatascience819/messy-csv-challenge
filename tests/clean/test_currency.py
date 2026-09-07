@@ -123,3 +123,23 @@ def test_taxa_do_real_e_sempre_um() -> None:
 
     taxas = fx.filter(pl.col("currency") == "BRL")["rate_to_brl"].unique().to_list()
     assert taxas == [1.0]
+
+
+def test_ordem_de_origem_e_preservada_mesmo_embaralhada() -> None:
+    """O sort por source_index garante determinismo para a deduplicacao consumir."""
+    df = pl.DataFrame(
+        {
+            "source_index": [2, 0, 1],
+            "t_amount": ["R$ 100,00", "$ 100.00", "$ 200.00"],
+            "order_date": [dt.date(2024, 3, 10), dt.date(2024, 3, 10), dt.date(2024, 4, 10)],
+        },
+        schema={"source_index": pl.UInt32(), "t_amount": pl.String(), "order_date": pl.Date()},
+    )
+
+    resultado = currency.apply(df, FX)
+
+    # A ordem foi corrigida pelo sort
+    assert resultado["source_index"].to_list() == [0, 1, 2]
+    # Os valores acompanharam suas linhas (nao foram embaralhados)
+    assert resultado["amount_original"].to_list() == [100.00, 200.00, 100.00]
+    assert resultado["amount_brl"].to_list() == [500.00, 1100.00, 100.00]
