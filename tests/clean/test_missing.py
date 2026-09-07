@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import polars as pl
 
+from messy_csv import contract
 from messy_csv.clean import missing
 
 _SCHEMA: dict[str, pl.DataType] = {
@@ -62,3 +63,8 @@ def test_nao_ha_coluna_de_flag_de_imputacao() -> None:
     resultado = missing.apply(_frame(None, None))
 
     assert resultado.columns == ["t_category", "category", "t_customer", "amount_original"]
+
+
+def test_rotulo_imputado_pertence_ao_contrato() -> None:
+    """O cast de Enum do contrato aceita este rotulo — a igualdade nao pode ser coincidencia."""
+    assert missing.UNKNOWN_CATEGORY in contract.CATEGORIES
