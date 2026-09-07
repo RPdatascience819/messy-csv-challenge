@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Messy CSV Challenge — Relatório de qualidade</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #fbfbfd; --surface: #ffffff; --border: #e3e3ea;
+  --text: #17171c; --muted: #5b5b6b;
+  --up: #0b7a4b; --down: #b3261e; --accent: #3350d8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f13; --surface: #18181f; --border: #2b2b35;
+    --text: #ececf1; --muted: #a2a2b2;
+    --up: #4bd991; --down: #ff8f85; --accent: #93a6ff;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 1.5rem 1rem 4rem; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px; line-height: 1.55;
+}
+main { max-width: 62rem; margin: 0 auto; }
+h1 { font-size: 1.55rem; margin: 0 0 .25rem; letter-spacing: -.01em; }
+h2 { font-size: 1.1rem; margin: 2.75rem 0 .75rem; }
+h3 { font-size: .8rem; font-weight: 600; color: var(--muted); margin: 0 0 .35rem; }
+p.lead { color: var(--muted); margin: 0 0 2rem; font-size: .92rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: .65rem; padding: .9rem; }
+.scores { display: flex; flex-wrap: wrap; gap: .75rem; }
+.scores .card { flex: 1 1 9rem; text-align: center; }
+.scores b { display: block; font-size: 2.1rem; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.grid { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.bar { height: .35rem; border-radius: 999px; background: var(--border); overflow: hidden; margin-top: .55rem; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+.up { color: var(--up); } .down { color: var(--down); }
+del, ins { text-decoration: none; }
+del { color: var(--down); } ins { color: var(--up); }
+.scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--surface);
+        border: 1px solid var(--border); border-radius: .65rem; font-size: .9rem; }
+th, td { padding: .5rem .7rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sample { margin-bottom: .75rem; }
+.sample table { font-size: .85rem; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em; word-break: break-word; }
+.empty { color: var(--muted); font-style: italic; }
+footer { color: var(--muted); font-size: .85rem; margin-top: 3.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Messy CSV Challenge — relatório de qualidade</h1>
+<p class="lead">
+  Dataset sintético de 5000 pedidos, gerado sujo de
+  propósito, medido, limpo e medido de novo com a mesma régua.
+  Execução de 07/09/2026.
+</p>
+
+<section id="sumario">
+<h2>Sumário executivo</h2>
+<div class="scores">
+  <div class="card">
+    <h3>Score antes</h3>
+    <b>95.0</b>
+  </div>
+  <div class="card">
+    <h3>Score depois</h3>
+    <b class="up">100.0</b>
+  </div>
+  <div class="card">
+    <h3>Variação</h3>
+    <b class="up">+5.0</b>
+  </div>
+  <div class="card">
+    <h3>Linhas aprovadas</h3>
+    <b>4237</b>
+  </div>
+  <div class="card">
+    <h3>Quarentena</h3>
+    <b>763</b>
+    <span class="mono">15.3%</span>
+  </div>
+</div>
+</section>
+
+<section id="dimensoes">
+<h2>As seis dimensões</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Completude</h3>
+    <del>97.9%</del>
+    →
+    <ins>100.0%</ins>
+    <div class="bar"><i style="width: 100.0%"></i></div>
+  </div>
+  <div class="card">
+    <h3>Unicidade</h3>
+    <del>96.1%</del>
+    →
+    <ins>100.0%</ins>
+    <div class="bar"><i style="width: 100.0%"></i></div>
+  </div>
+  <div class="card">
+    <h3>Validade temporal</h3>
+    <del>97.0%</del>
+    →
+    <ins>100.0%</ins>
+    <div class="bar"><i style="width: 100.0%"></i></div>
+  </div>
+  <div class="card">
+    <h3>Consistência de categoria</h3>
+    <del>93.6%</del>
+    →
+    <ins>100.0%</ins>
+    <div class="bar"><i style="width: 100.0%"></i></div>
+  </div>
+  <div class="card">
+    <h3>Normalização monetária</h3>
+    <del>95.3%</del>
+    →
+    <ins>100.0%</ins>
+    <div class="bar"><i style="width: 100.0%"></i></div>
+  </div>
+  <div class="card">
+    <h3>Limpeza textual</h3>
+    <del>90.0%</del>
+    →
+    <ins>100.0%</ins>
+    <div class="bar"><i style="width: 100.0%"></i></div>
+  </div>
+</div>
+</section>
+
+<section id="sujeiras">
+<h2>Catálogo de sujeiras no dado bruto</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Sujeira</th><th>Causa simulada</th><th class="num">Linhas afetadas</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Whitespace</td>
+      <td>Digitação manual no painel</td>
+      <td class="num">1945</td>
+    </tr>
+    <tr>
+      <td>Datas inconsistentes</td>
+      <td>Três sistemas integrados</td>
+      <td class="num">2181</td>
+    </tr>
+    <tr>
+      <td>IDs duplicados</td>
+      <td>Retry de integração com marketplace</td>
+      <td class="num">304</td>
+    </tr>
+    <tr>
+      <td>Valores ausentes</td>
+      <td>Falha parcial de importação</td>
+      <td class="num">507</td>
+    </tr>
+    <tr>
+      <td>Moedas mistas</td>
+      <td>Loja vende para fora do Brasil</td>
+      <td class="num">877</td>
+    </tr>
+    <tr>
+      <td>Categorias inconsistentes</td>
+      <td>Cadastro livre, sem enum</td>
+      <td class="num">1704</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="amostras">
+<h2>Antes e depois, linha a linha</h2>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">2</td>
+      <td class="mono">2</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">2023-10-12</td>
+      <td class="mono">2023-10-12</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">Ana Ferreira</td>
+      <td class="mono">Ana Ferreira</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">casa</td>
+      <td class="mono">Casa</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">R$ 481,69</td>
+      <td class="mono">R$ 481,69</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">3</td>
+      <td class="mono">3</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">2024-07-19</td>
+      <td class="mono">2024-07-19</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">Vitória Martins</td>
+      <td class="mono">Vitória Martins</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">ELETRONICOS</td>
+      <td class="mono">Eletrônicos</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">4.278,61</td>
+      <td class="mono">R$ 4.278,61</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">4</td>
+      <td class="mono">4</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">30/11/2024</td>
+      <td class="mono">2024-11-30</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">  Vitória Ferreira</td>
+      <td class="mono">Vitória Ferreira</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">vestuario</td>
+      <td class="mono">Moda</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">R$ 3.446,33</td>
+      <td class="mono">R$ 3.446,33</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">5</td>
+      <td class="mono">5</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">Aug 03 2024</td>
+      <td class="mono">2024-08-03</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">Karina Gomes</td>
+      <td class="mono">Karina Gomes</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">Livros</td>
+      <td class="mono">Livros</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">USD 715.13</td>
+      <td class="mono">R$ 3.968,11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">6</td>
+      <td class="mono">6</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">2024-05-20</td>
+      <td class="mono">2024-05-20</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">Bruno Duarte</td>
+      <td class="mono">Bruno Duarte</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">Moda</td>
+      <td class="mono">Moda</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">USD  1920.02</td>
+      <td class="mono">R$ 9.893,10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">7</td>
+      <td class="mono">7</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">15/12/2023</td>
+      <td class="mono">2023-12-15</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">Nuno Ferreira</td>
+      <td class="mono">Nuno Ferreira</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">Casa</td>
+      <td class="mono">Casa</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">549,73</td>
+      <td class="mono">R$ 549,73</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">8</td>
+      <td class="mono">8</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">Jan 01 2023  </td>
+      <td class="mono">2023-01-01</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">Paulo Almeida</td>
+      <td class="mono">Paulo Almeida</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">Casa</td>
+      <td class="mono">Casa</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">308,32</td>
+      <td class="mono">R$ 308,32</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>order_id</td>
+      <td class="mono">9</td>
+      <td class="mono">9</td>
+    </tr>
+    <tr>
+      <td>order_date</td>
+      <td class="mono">16/07/2024</td>
+      <td class="mono">2024-07-16</td>
+    </tr>
+    <tr>
+      <td>customer</td>
+      <td class="mono">Rafael Vasconcelos</td>
+      <td class="mono">Rafael Vasconcelos</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td class="mono">Moda</td>
+      <td class="mono">Moda</td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td class="mono">R$ 3.569,74</td>
+      <td class="mono">R$ 3.569,74</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="quarentena">
+<h2>Quarentena por motivo</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Motivo</th><th class="num">Linhas</th><th>Exemplo do dado original</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>cliente ausente</td>
+      <td class="num">173</td>
+      <td class="mono">52 | 09/10/2023 |  | Eletrônicos | 4.515,70</td>
+    </tr>
+    <tr>
+      <td>order_id duplicado irreconciliável</td>
+      <td class="num">145</td>
+      <td class="mono">  730 | 2023-07-22 | Paulo Vasconcelos | livraria | </td>
+    </tr>
+    <tr>
+      <td>valor ausente</td>
+      <td class="num">141</td>
+      <td class="mono">121 | 2019-10-10 | Ana Ribeiro | Esporte | </td>
+    </tr>
+    <tr>
+      <td>categoria desconhecida</td>
+      <td class="num">128</td>
+      <td class="mono">17 | 2023-02-22 |   Nuno Jesus | outros | 1.324,20</td>
+    </tr>
+    <tr>
+      <td>data inválida</td>
+      <td class="num">101</td>
+      <td class="mono">29 | 2024-13-30 | Mariana Teixeira | eletro | R$ 270,27</td>
+    </tr>
+    <tr>
+      <td>valor inválido</td>
+      <td class="num">96</td>
+      <td class="mono">1 | 2023-10-09 |   Eduarda Duarte | Esportes | -</td>
+    </tr>
+    <tr>
+      <td>order_id inválido</td>
+      <td class="num">52</td>
+      <td class="mono">ORD-1023 | 2024-02-04 | Nuno Santos | Esporte | R$ 1.378,87</td>
+    </tr>
+    <tr>
+      <td>data fora do intervalo</td>
+      <td class="num">48</td>
+      <td class="mono">107 | 2019-07-16 | Isabela Lopes | ESPORTE | R$ 3.344,87</td>
+    </tr>
+    <tr>
+      <td>valor não positivo</td>
+      <td class="num">43</td>
+      <td class="mono">85 | 2023-10-30 | Vitória Oliveira | Livros | -50,00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="metodologia">
+<h2>Nota metodológica</h2>
+<p>
+  As seis dimensões têm <strong>peso igual</strong>. Qualquer ponderação seria
+  arbitrária sem um consumidor real do dado dizendo qual delas dói mais.
+</p>
+<p>
+  O score do "depois" é medido sobre o dataset limpo <strong>renderizado de volta
+  à forma textual de cinco colunas</strong> do dado bruto. É um rodeio deliberado:
+  garante que antes e depois passem pelo mesmo código de medição. Duas funções de
+  medição — uma para texto, outra para dado tipado — começariam idênticas e
+  divergiriam na primeira manutenção, e a melhora reportada passaria a incluir a
+  diferença entre os dois códigos.
+</p>
+<p>
+  <strong>Limpeza textual</strong> mede só células preenchidas: uma célula vazia
+  já pesa em completude, e contá-la duas vezes puniria o mesmo defeito em
+  duplicidade. <strong>Unicidade</strong> divide os <code>order_id</code>
+  distintos e não nulos pelo total de linhas — um id ilegível não é "mais um
+  valor distinto".
+</p>
+<p>
+  Linhas que violam o contrato vão para <strong>quarentena</strong>, nunca para o
+  lixo, e são gravadas exatamente como chegaram. Uma linha pode acumular mais de
+  um motivo, então a soma da coluna "Linhas" acima pode ultrapassar o total
+  rejeitado.
+</p>
+<p>
+  <strong>Dinheiro nunca é imputado.</strong> Valor ausente ou ilegível rejeita a
+  linha. A única imputação do pipeline é a categoria ausente, que vira
+  <code>Não informado</code> — um rótulo que declara a ausência em vez de
+  escondê-la. As taxas de câmbio são fictícias, porém plausíveis, e vêm de uma
+  tabela mensal versionada no repositório: uma API de cotação em tempo real
+  tornaria o resultado irreproduzível amanhã.
+</p>
+</section>
+
+<footer>
+  Gerado por <code>messy-csv report</code> — HTML e CSS próprios, sem framework,
+  sem requisição externa e sem JavaScript.
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Messy CSV Challenge — Relatório de qualidade</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #fbfbfd; --surface: #ffffff; --border: #e3e3ea;
+  --text: #17171c; --muted: #5b5b6b;
+  --up: #0b7a4b; --down: #b3261e; --accent: #3350d8;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f13; --surface: #18181f; --border: #2b2b35;
+    --text: #ececf1; --muted: #a2a2b2;
+    --up: #4bd991; --down: #ff8f85; --accent: #93a6ff;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 1.5rem 1rem 4rem; background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px; line-height: 1.55;
+}
+main { max-width: 62rem; margin: 0 auto; }
+h1 { font-size: 1.55rem; margin: 0 0 .25rem; letter-spacing: -.01em; }
+h2 { font-size: 1.1rem; margin: 2.75rem 0 .75rem; }
+h3 { font-size: .8rem; font-weight: 600; color: var(--muted); margin: 0 0 .35rem; }
+p.lead { color: var(--muted); margin: 0 0 2rem; font-size: .92rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: .65rem; padding: .9rem; }
+.scores { display: flex; flex-wrap: wrap; gap: .75rem; }
+.scores .card { flex: 1 1 9rem; text-align: center; }
+.scores b { display: block; font-size: 2.1rem; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.grid { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.bar { height: .35rem; border-radius: 999px; background: var(--border); overflow: hidden; margin-top: .55rem; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+.up { color: var(--up); } .down { color: var(--down); }
+del, ins { text-decoration: none; }
+del { color: var(--down); } ins { color: var(--up); }
+.scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--surface);
+        border: 1px solid var(--border); border-radius: .65rem; font-size: .9rem; }
+th, td { padding: .5rem .7rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sample { margin-bottom: .75rem; }
+.sample table { font-size: .85rem; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85em; word-break: break-word; }
+.empty { color: var(--muted); font-style: italic; }
+footer { color: var(--muted); font-size: .85rem; margin-top: 3.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Messy CSV Challenge — relatório de qualidade</h1>
+<p class="lead">
+  Dataset sintético de {{ data.comparison.before.rows }} pedidos, gerado sujo de
+  propósito, medido, limpo e medido de novo com a mesma régua.
+  Execução de {{ data.generated_at.strftime("%d/%m/%Y") }}.
+</p>
+
+<section id="sumario">
+<h2>Sumário executivo</h2>
+<div class="scores">
+  <div class="card">
+    <h3>Score antes</h3>
+    <b>{{ "%.1f"|format(data.comparison.before.score) }}</b>
+  </div>
+  <div class="card">
+    <h3>Score depois</h3>
+    <b class="up">{{ "%.1f"|format(data.comparison.after.score) }}</b>
+  </div>
+  <div class="card">
+    <h3>Variação</h3>
+    <b class="{{ 'up' if data.comparison.score_delta >= 0 else 'down' }}">{{ "%+.1f"|format(data.comparison.score_delta) }}</b>
+  </div>
+  <div class="card">
+    <h3>Linhas aprovadas</h3>
+    <b>{{ data.comparison.rows_kept }}</b>
+  </div>
+  <div class="card">
+    <h3>Quarentena</h3>
+    <b>{{ data.comparison.rows_quarantined }}</b>
+    <span class="mono">{{ "%.1f"|format(data.comparison.quarantine_rate * 100) }}%</span>
+  </div>
+</div>
+</section>
+
+<section id="dimensoes">
+<h2>As seis dimensões</h2>
+<div class="grid">
+  {% for d in data.comparison.dimensions %}
+  <div class="card">
+    <h3>{{ d.label }}</h3>
+    <del>{{ "%.1f"|format(d.before * 100) }}%</del>
+    →
+    <ins>{{ "%.1f"|format(d.after * 100) }}%</ins>
+    <div class="bar"><i style="width: {{ "%.1f"|format(d.after * 100) }}%"></i></div>
+  </div>
+  {% endfor %}
+</div>
+</section>
+
+<section id="sujeiras">
+<h2>Catálogo de sujeiras no dado bruto</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Sujeira</th><th>Causa simulada</th><th class="num">Linhas afetadas</th></tr></thead>
+  <tbody>
+  {% for item in data.dirt %}
+    <tr>
+      <td>{{ item["sujeira"] }}</td>
+      <td>{{ item["causa"] }}</td>
+      <td class="num">{{ item["linhas"] }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+</section>
+
+<section id="amostras">
+<h2>Antes e depois, linha a linha</h2>
+{% for amostra in data.samples %}
+<div class="sample scroll">
+<table>
+  <thead><tr><th>Campo</th><th>Antes</th><th>Depois</th></tr></thead>
+  <tbody>
+  {% for coluna in data.columns %}
+    <tr>
+      <td>{{ coluna }}</td>
+      <td class="mono">{% if amostra.before[coluna] %}{{ amostra.before[coluna] }}{% else %}<span class="empty">vazio</span>{% endif %}</td>
+      <td class="mono">{{ amostra.after[coluna] }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endfor %}
+</section>
+
+<section id="quarentena">
+<h2>Quarentena por motivo</h2>
+{% if data.quarantine %}
+<div class="scroll">
+<table>
+  <thead><tr><th>Motivo</th><th class="num">Linhas</th><th>Exemplo do dado original</th></tr></thead>
+  <tbody>
+  {% for grupo in data.quarantine %}
+    <tr>
+      <td>{{ grupo.reason }}</td>
+      <td class="num">{{ grupo.rows }}</td>
+      <td class="mono">{{ grupo.example.values()|join(" | ") }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<p class="empty">Nenhuma linha rejeitada.</p>
+{% endif %}
+</section>
+
+<section id="metodologia">
+<h2>Nota metodológica</h2>
+<p>
+  As seis dimensões têm <strong>peso igual</strong>. Qualquer ponderação seria
+  arbitrária sem um consumidor real do dado dizendo qual delas dói mais.
+</p>
+<p>
+  O score do "depois" é medido sobre o dataset limpo <strong>renderizado de volta
+  à forma textual de cinco colunas</strong> do dado bruto. É um rodeio deliberado:
+  garante que antes e depois passem pelo mesmo código de medição. Duas funções de
+  medição — uma para texto, outra para dado tipado — começariam idênticas e
+  divergiriam na primeira manutenção, e a melhora reportada passaria a incluir a
+  diferença entre os dois códigos.
+</p>
+<p>
+  <strong>Limpeza textual</strong> mede só células preenchidas: uma célula vazia
+  já pesa em completude, e contá-la duas vezes puniria o mesmo defeito em
+  duplicidade. <strong>Unicidade</strong> divide os <code>order_id</code>
+  distintos e não nulos pelo total de linhas — um id ilegível não é "mais um
+  valor distinto".
+</p>
+<p>
+  Linhas que violam o contrato vão para <strong>quarentena</strong>, nunca para o
+  lixo, e são gravadas exatamente como chegaram. Uma linha pode acumular mais de
+  um motivo, então a soma da coluna "Linhas" acima pode ultrapassar o total
+  rejeitado.
+</p>
+<p>
+  <strong>Dinheiro nunca é imputado.</strong> Valor ausente ou ilegível rejeita a
+  linha. A única imputação do pipeline é a categoria ausente, que vira
+  <code>Não informado</code> — um rótulo que declara a ausência em vez de
+  escondê-la. As taxas de câmbio são fictícias, porém plausíveis, e vêm de uma
+  tabela mensal versionada no repositório: uma API de cotação em tempo real
+  tornaria o resultado irreproduzível amanhã.
+</p>
+</section>
+
+<footer>
+  Gerado por <code>messy-csv report</code> — HTML e CSS próprios, sem framework,
+  sem requisição externa e sem JavaScript.
+</footer>
+
+</main>
+</body>
+</html>
