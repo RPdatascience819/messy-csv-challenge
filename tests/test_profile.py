@@ -156,3 +156,38 @@ def test_contagem_de_sujeiras_cobre_o_catalogo(tmp_path: Path) -> None:
 
 def test_colunas_medidas_batem_com_o_contrato() -> None:
     assert profile.VIEW_COLUMNS == contract.RAW_COLUMNS
+
+
+def test_contagem_de_sujeiras_trava_os_numeros_do_relatorio(tmp_path: Path) -> None:
+    """A tabela do relatorio e conteudo publicado: sem valor travado, ela muda em silencio."""
+    bruto_path = generate.write_dirty_dataset(tmp_path / "dirty.csv")
+    visao = profile.view_from_raw(pipeline.load_raw(bruto_path))
+
+    assert profile.dirt_counts(visao) == [
+        {"sujeira": "Whitespace", "causa": "Digitação manual no painel", "linhas": 1945},
+        {"sujeira": "Datas inconsistentes", "causa": "Três sistemas integrados", "linhas": 2181},
+        {
+            "sujeira": "IDs duplicados",
+            "causa": "Retry de integração com marketplace",
+            "linhas": 304,
+        },
+        {"sujeira": "Valores ausentes", "causa": "Falha parcial de importação", "linhas": 507},
+        {"sujeira": "Moedas mistas", "causa": "Loja vende para fora do Brasil", "linhas": 877},
+        {
+            "sujeira": "Categorias inconsistentes",
+            "causa": "Cadastro livre, sem enum",
+            "linhas": 1704,
+        },
+    ]
+
+
+def test_to_dict_expoe_dimensoes_e_score(tmp_path: Path) -> None:
+    """A T13 serializa o resultado por aqui: a chave 'score' nao pode sumir num refactor."""
+    bruto_path = generate.write_dirty_dataset(tmp_path / "dirty.csv")
+    resultado = profile.profile(profile.view_from_raw(pipeline.load_raw(bruto_path)), TODAY)
+
+    como_dict = resultado.to_dict()
+
+    assert set(como_dict) == {"rows", "score", *profile.DIMENSION_LABELS}
+    assert como_dict["rows"] == resultado.rows
+    assert como_dict["score"] == resultado.score
