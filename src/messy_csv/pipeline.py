@@ -40,7 +40,15 @@ def transform(df: pl.DataFrame, fx: pl.DataFrame) -> pl.DataFrame:
 def clean_frame(
     df: pl.DataFrame, fx: pl.DataFrame, today: dt.date
 ) -> tuple[pl.DataFrame, pl.DataFrame]:
-    return contract.validate(transform(df, fx), today)
+    """Valida contra o menor entre `today` e o teto que `fx` cobre (Ruling 26).
+
+    Uma data sem competencia cadastrada nao tem taxa para converter: sem o
+    grampeamento aqui, ela passaria pela regra de intervalo do contrato e so
+    estouraria depois, em `_assert_sem_nulos`, derrubando o processo inteiro em
+    vez de cair como "data fora do intervalo" — o motivo que ja existe para isso.
+    """
+    limite = min(today, currency.max_covered_date(fx))
+    return contract.validate(transform(df, fx), limite)
 
 
 def write_outputs(

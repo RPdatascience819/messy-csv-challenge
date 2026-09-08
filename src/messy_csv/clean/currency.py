@@ -11,6 +11,7 @@ a forma dos outros cinco, e por isso fica registrado aqui.
 
 from __future__ import annotations
 
+import datetime as dt
 from pathlib import Path
 
 import polars as pl
@@ -26,6 +27,19 @@ def load_fx_rates(path: Path = FX_PATH) -> pl.DataFrame:
         path,
         schema={"month": pl.String(), "currency": pl.String(), "rate_to_brl": pl.Float64()},
     )
+
+
+def max_covered_date(fx: pl.DataFrame) -> dt.date:
+    """Ultimo dia da competencia mais recente coberta pela tabela ja carregada.
+
+    Usada pelo chamador (Ruling 28: quem ja le `fx_rates.csv` calcula o limite e
+    entrega o valor pronto — este modulo nao abre o arquivo de novo so para
+    descobrir o proprio teto).
+    """
+    ultimo_mes = str(fx["month"].max())
+    ano, mes = (int(parte) for parte in ultimo_mes.split("-"))
+    proximo_mes = dt.date(ano + mes // 12, mes % 12 + 1, 1)
+    return proximo_mes - dt.timedelta(days=1)
 
 
 def currency_expr(column: str) -> pl.Expr:

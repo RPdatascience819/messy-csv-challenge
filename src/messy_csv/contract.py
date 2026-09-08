@@ -69,6 +69,15 @@ def reject_reasons(today: dt.date) -> list[tuple[str, pl.Expr]]:
         ("order_id duplicado irreconciliável", pl.col("is_duplicate_loser")),
         ("data inválida", order_date.is_null()),
         (
+            # A letra do §4.2 diz "ate a data de execucao", mas quem chama esta
+            # funcao (pipeline.clean_frame) injeta aqui o menor entre a execucao e
+            # a ultima competencia coberta por data/fx_rates.csv (Ruling 26): uma
+            # data sem taxa de cambio cadastrada nao tem como virar amount_brl, e
+            # sem este grampeamento ela passaria por esta regra e so estouraria
+            # depois, em _assert_sem_nulos, derrubando o processo inteiro em vez
+            # de cair aqui como "data fora do intervalo". Este modulo nao abre a
+            # tabela para descobrir o proprio teto (Ruling 28) — so recebe `today`
+            # ja pronto, do mesmo jeito que sempre recebeu.
             "data fora do intervalo",
             order_date.is_not_null() & ((order_date < MIN_DATE) | (order_date > today)),
         ),
