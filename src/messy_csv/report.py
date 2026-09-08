@@ -111,7 +111,10 @@ def group_quarantine(rejected: pl.DataFrame) -> list[QuarantineGroup]:
 
     explodido = rejected.with_columns(
         pl.col("reject_reason").str.split(contract.REJECT_REASON_SEPARATOR)
-    ).explode("reject_reason")
+        # empty_as_null explicito: o Polars 2.0 troca o padrao para False. Aqui e inerte
+        # (reject_reason nunca e lista vazia numa linha rejeitada), mas fixar tira o aviso
+        # e trava a semantica de hoje em vez de herdar a de amanha.
+    ).explode("reject_reason", empty_as_null=True)
 
     grupos = (
         explodido.group_by("reject_reason", maintain_order=True)
