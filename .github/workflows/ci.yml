@@ -9,10 +9,10 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Instalar uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
 
@@ -36,3 +36,29 @@ jobs:
           uv run coverage report
           --include="*/messy_csv/contract.py,*/messy_csv/clean/*"
           --fail-under=90
+
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+
+      - name: Sincronizar o ambiente
+        run: uv sync --locked
+
+      - name: Cadeia completa
+        run: uv run messy-csv run
+
+      - name: Os quatro artefatos existem
+        run: |
+          test -f data/raw/orders_dirty.csv
+          test -f data/clean/orders.csv
+          test -f data/rejects/rejects.csv
+          test -f docs/index.html
+
+      - name: Os dados versionados sao reproduziveis
+        run: git diff --exit-code -- data/
