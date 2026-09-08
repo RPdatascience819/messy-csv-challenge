@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from messy_csv import cli, pipeline, profile
+from messy_csv import cli, contract, pipeline, profile
 from messy_csv.clean import currency
 
 TODAY = "2025-06-30"
@@ -128,6 +128,41 @@ def test_clean_sem_dataset_bruto_falha_com_mensagem(
 
     assert codigo == 2
     assert "orders_dirty.csv" in capsys.readouterr().err
+
+
+def test_clean_com_erro_de_contrato_sai_com_mensagem_distinta(
+    dados: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """ContractError e erro de dado, nao de arquivo: a mensagem nao pode reaproveitar a outra."""
+    cli.main(_args(dados, tmp_path / "docs", "generate"))
+    capsys.readouterr()
+
+    def _explode(*args: object, **kwargs: object) -> object:
+        raise contract.ContractError("linhas aprovadas contem nulo em: amount_brl")
+
+    monkeypatch.setattr(pipeline, "run", _explode)
+    codigo = cli.main(_args(dados, tmp_path / "docs", "clean"))
+
+    saida = capsys.readouterr()
+    assert codigo == 2
+    assert "erro de dado" in saida.err
+    assert "arquivo nao encontrado" not in saida.err
+
+
+def test_profile_com_dataset_vazio_sai_com_mensagem_distinta(
+    dados: Path, tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """O ValueError de profile.profile (dataset vazio) e erro de dado, nao de transporte."""
+    vazio = dados / "vazio.csv"
+    vazio.parent.mkdir(parents=True, exist_ok=True)
+    vazio.write_text("order_id,order_date,customer,category,amount\n", encoding="utf-8")
+
+    codigo = cli.main(_args(dados, tmp_path / "docs", "profile", str(vazio)))
+
+    saida = capsys.readouterr()
+    assert codigo == 2
+    assert "erro de dado" in saida.err
+    assert "arquivo nao encontrado" not in saida.err
 
 
 def test_sem_subcomando_mostra_ajuda_e_falha(capsys: pytest.CaptureFixture[str]) -> None:
