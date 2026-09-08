@@ -121,6 +121,19 @@ de cada commit local.
 Python 3.13 · [uv](https://docs.astral.sh/uv/) · [Polars](https://pola.rs)
 (eager) · Jinja2 · pytest · ruff · mypy · GitHub Actions · GitHub Pages
 
+**Por que Polars, não pandas.** O padrão `pl.coalesce(...str.strptime(...,
+strict=False))` declara explicitamente cada formato de data aceito e converte
+falha em `null` auditável, que vira métrica direta no relatório. O equivalente
+em pandas (`format="mixed"`) infere linha a linha: conveniente, mas não
+auditável. Custo aceito: pandas aparece mais em descrições de vaga — esta seção
+é a mitigação combinada com a decisão.
+
+**Por que eager, não lazy.** O dataset tem ~5.000 linhas; `LazyFrame` não traz
+ganho mensurável nessa escala e afasta o erro do ponto que o causou (a exceção
+só apareceria no `.collect()`, longe de onde nasceu). Mudaria de decisão acima
+de ~1.000.000 de linhas, ou se o pipeline passasse a ler de múltiplas fontes —
+registrado aqui como escolha consciente, não como esquecimento.
+
 Sem banco de dados, sem orquestrador, sem Docker e sem dashboard interativo — as
 [exclusões estão justificadas uma a uma na spec](docs/superpowers/specs/2026-08-24-messy-csv-design.md).
 
@@ -129,4 +142,7 @@ Sem banco de dados, sem orquestrador, sem Docker e sem dashboard interativo — 
 O dataset é sintético e não reproduz a distribuição estatística de um e-commerce
 real: serve para exercitar regras, não para inferir comportamento de mercado. As
 taxas de câmbio são inventadas. Timezone é ignorado — datas com hora são
-truncadas para data.
+truncadas para data. O limite superior de data válida não é literalmente "hoje":
+é o menor entre `--today` e a última competência coberta por
+`data/fx_rates.csv` (hoje, 2024-12) — uma data sem taxa de câmbio cadastrada não
+tem como virar `amount_brl` e vai para quarentena em vez de derrubar o processo.
