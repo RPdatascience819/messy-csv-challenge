@@ -1,6 +1,12 @@
 """Transformador 3: parse do simbolo monetario e conversao por competencia (D4).
 
 Roda depois de `dates` porque o join de cambio usa o mes de order_date (§6.1).
+
+`apply` foge a letra do §6, que descreve os seis transformadores como
+`DataFrame -> DataFrame`: aqui e `(DataFrame, DataFrame) -> DataFrame`, porque a
+tabela de cambio e injetada em vez de lida de dentro da funcao. E o desvio
+certo — injetar mantem a funcao pura e testavel sem tocar disco — mas contraria
+a forma dos outros cinco, e por isso fica registrado aqui.
 """
 
 from __future__ import annotations

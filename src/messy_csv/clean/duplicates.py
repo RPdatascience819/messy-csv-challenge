@@ -10,6 +10,13 @@ import polars as pl
 
 # So faz sentido contar nulos depois que dates, currency e categories rodaram:
 # antes disso nada foi parseado e todas as linhas pareceriam igualmente completas.
+#
+# A spec §5.4 pede so "menos campos nulos", mas a tupla pesa a celula de valor em
+# tripulo: amount_original, currency_original e amount_brl nascem da mesma
+# celula bruta (amount) e caem juntas quando ela e ilegivel, enquanto uma
+# categoria ausente derruba so 1. Ponderacao consciente, nao a regra escrita ao
+# pe da letra — no dataset real nunca chega a inverter um resultado, mas fica
+# registrado aqui em vez de ficar implicito na contagem de colunas.
 COMPLETENESS_COLUMNS: tuple[str, ...] = (
     "order_date",
     "t_customer",
