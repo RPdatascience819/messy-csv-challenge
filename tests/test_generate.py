@@ -33,11 +33,21 @@ def test_seeds_diferentes_produzem_datasets_diferentes() -> None:
 
 
 def test_datas_nao_iso_ficam_perto_de_quarenta_por_cento() -> None:
+    """Mede sobre a coluna aparada.
+
+    Sem `strip_chars`, uma data ISO impecavel com espaco na ponta (whitespace,
+    outra sujeira) contava como "nao-ISO" e inflava esta metrica de 0.3828 para
+    0.4362 — perto o bastante do teto antigo (0.44) para um ajuste futuro em
+    `WHITESPACE_RATE` reprovar este teste por um motivo que o nome dele nao diz.
+    Valor medido com a seed 42, aparado: 0.3828.
+    """
     df = generate.build_frame()
-    iso = df.filter(pl.col("order_date").str.contains(r"^\d{4}-\d{2}-\d{2}$")).height
+    iso = df.filter(
+        pl.col("order_date").str.strip_chars().str.contains(r"^\d{4}-\d{2}-\d{2}$")
+    ).height
 
     nao_iso = (generate.ROWS - iso) / generate.ROWS
-    assert 0.36 <= nao_iso <= 0.44
+    assert 0.37 <= nao_iso <= 0.40
 
 
 def test_ids_duplicados_ficam_perto_de_tres_por_cento() -> None:
@@ -57,7 +67,7 @@ def test_moeda_estrangeira_fica_perto_de_dezoito_por_cento() -> None:
     assert 0.15 <= (usd - reais) / generate.ROWS <= 0.21
 
 
-def test_todas_as_seis_sujeiras_aparecem() -> None:
+def test_todas_as_sujeiras_do_catalogo_e_de_l2_aparecem() -> None:
     df = generate.build_frame()
 
     assert df.filter(pl.col("customer").str.contains(r"^\s|\s$|  ")).height > 0
