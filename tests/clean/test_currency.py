@@ -5,6 +5,7 @@ import datetime as dt
 import polars as pl
 import pytest
 
+from messy_csv import generate
 from messy_csv.clean import currency
 
 FX = pl.DataFrame(
@@ -104,15 +105,26 @@ def test_data_invalida_nao_derruba_a_conversao() -> None:
     assert resultado.height == 1
 
 
+def _competencias(inicio: dt.date, fim: dt.date) -> set[str]:
+    """Todas as competencias "YYYY-MM" entre `inicio` e `fim`, inclusive."""
+    competencias: set[str] = set()
+    ano, mes = inicio.year, inicio.month
+    while (ano, mes) <= (fim.year, fim.month):
+        competencias.add(f"{ano}-{mes:02d}")
+        ano, mes = (ano + 1, 1) if mes == 12 else (ano, mes + 1)
+    return competencias
+
+
 def test_tabela_versionada_cobre_todo_o_intervalo_do_gerador() -> None:
-    """Um mes faltando produziria amount_brl nulo — dado errado em silencio."""
+    """Um mes faltando produziria amount_brl nulo — dado errado em silencio.
+
+    As competencias vem de `generate.DATE_START`/`DATE_END`, nao de anos fixos:
+    e o unico guardiao da decisao L4, e anos fixos deixariam alargar o intervalo
+    do gerador sem estender a tabela passar neste teste e so explodir em producao.
+    """
     fx = currency.load_fx_rates(currency.FX_PATH)
-    esperados = {
-        (f"{ano}-{mes:02d}", moeda)
-        for ano in (2023, 2024)
-        for mes in range(1, 13)
-        for moeda in ("BRL", "USD")
-    }
+    meses = _competencias(generate.DATE_START, generate.DATE_END)
+    esperados = {(mes, moeda) for mes in meses for moeda in ("BRL", "USD")}
 
     presentes = set(zip(fx["month"].to_list(), fx["currency"].to_list(), strict=True))
     assert esperados <= presentes
