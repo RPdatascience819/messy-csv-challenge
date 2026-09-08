@@ -41,6 +41,8 @@ def test_celula_vazia_vira_nulo_e_nao_string_vazia() -> None:
         (" Ana Souza", False),
         ("Ana Souza ", False),
         ("Ana  Souza", False),
+        ("", True),
+        ("   ", False),
         (None, None),
     ],
 )
