@@ -184,6 +184,13 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     try:
         return int(args.handler(args))
+    except (contract.ContractError, ValueError) as erro:
+        # Erro de dado (contrato violado ou profile.profile em dataset vazio): a
+        # mensagem e o codigo sao os mesmos de baixo de proposito, mas o texto
+        # precisa ser outro — dizer "arquivo nao encontrado" para um dado invalido
+        # manda quem le procurar o problema no lugar errado.
+        print(f"erro de dado: {erro}", file=sys.stderr)
+        return 2
     except (FileNotFoundError, pl.exceptions.PolarsError) as erro:
         print(f"arquivo nao encontrado ou ilegivel: {erro}", file=sys.stderr)
         return 2
