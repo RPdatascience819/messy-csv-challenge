@@ -49,6 +49,45 @@ Todo comando aceita `--today YYYY-MM-DD`. É a única leitura de relógio do
 projeto, e ela fica na CLI: nenhuma função de domínio chama `date.today()`, o que
 torna cada teste independente da data em que roda.
 
+## Como verificar
+
+A barreira de qualidade mais abaixo prova que o **código** faz o que os testes
+esperam. Ela não diz nada sobre os CSVs versionados — eles poderiam estar
+editados à mão. Quem quiser desconfiar de verdade roda estes dois comandos:
+
+```bash
+uv run messy-csv run
+git diff --exit-code -- data/
+```
+
+O primeiro sobrescreve os artefatos e manda o código gerá-los do zero; o segundo
+exige que voltem **idênticos** ao que está commitado. Foi essa checagem que,
+durante a construção, pegou um hook de pre-commit comendo os espaços finais que
+o gerador injeta de propósito. Os testes estavam todos verdes.
+
+O `git status` vai acusar `M docs/index.html` depois de rodar, e a diferença é de
+**1 byte**: o newline final que o `end-of-file-fixer` acrescenta ao commitar e que
+o `render()` não emite — `git diff --ignore-all-space -- docs/index.html` sai
+vazio. O relatório fica fora do `--exit-code` de propósito, porque carrega a data
+de execução e mudaria todo dia por um motivo que não é regressão.
+
+### Duvide da suíte
+
+Teste verde prova que o código passa, não que o teste protege. As duas mutações
+abaixo levam um minuto e reprovam em exatamente um lugar cada:
+
+| Mutação | O que quebra |
+|---|---|
+| Inverter `duplicates` e `missing` em `pipeline.transform()` | 1 teste: `test_ordem_dos_transformadores_decide_a_linha_vencedora` |
+| Trocar um valor à mão em `data/clean/orders.csv` | 1 teste: `test_artefatos_versionados_batem_com_o_pipeline`, apontando o byte divergente |
+
+A primeira é a mais reveladora. Com a ordem invertida, o pipeline ainda entrega
+4.237 aprovados, 763 em quarentena e score 100,0 — e os CSVs saem **byte a byte
+idênticos**. A regra "mantém a linha mais completa" está corrompida e nenhum
+artefato denuncia, porque o gerador sempre emite a linha íntegra antes do clone
+degradado, e o desempate por ordem de origem acaba escolhendo certo por acidente.
+Só o caso forjado expõe a regra. É por isso que ele existe.
+
 ## Como funciona
 
 ```
