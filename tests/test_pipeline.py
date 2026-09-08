@@ -90,6 +90,22 @@ def test_nenhuma_linha_desaparece() -> None:
     assert aceitos.height + rejeitados.height == frame.height
 
 
+def test_data_sem_taxa_de_cambio_cai_em_quarentena_em_vez_de_estourar() -> None:
+    """Ruling 26/28: o teto vem de fx, nao so de `today`.
+
+    Regressao do bug em que uma data valida pelo contrato mas sem competencia em
+    fx_rates.csv chegava com amount_brl nulo em accepted e derrubava o processo
+    inteiro em contract.ContractError, em vez de cair como quarentena.
+    """
+    fx_curta = FX.filter(pl.col("month") == "2023-01")
+    frame = _raw({"raw_order_date": "2023-03-10"})  # dentro de MIN_DATE..TODAY, fora de fx_curta
+
+    aceitos, rejeitados = pipeline.clean_frame(frame, fx_curta, TODAY)
+
+    assert aceitos.height == 0
+    assert rejeitados["reject_reason"].to_list() == ["data fora do intervalo"]
+
+
 def test_todos_os_motivos_aparecem_no_dataset_real(tmp_path: Path) -> None:
     """Spec §8: cada motivo do §4.3 precisa de ao menos um caso com dado real."""
     caminho = generate.write_dirty_dataset(tmp_path / "dirty.csv")
@@ -171,10 +187,13 @@ def test_rodar_duas_vezes_produz_o_mesmo_artefato(tmp_path: Path) -> None:
 
 def test_artefatos_versionados_batem_com_o_pipeline(tmp_path: Path) -> None:
     """Os CSVs commitados sao a vitrine: se divergirem do codigo, a vitrine mente."""
+    bruto = tmp_path / "dirty.csv"
     limpo = tmp_path / "orders.csv"
     rejeitos = tmp_path / "rejects.csv"
 
-    pipeline.run(TODAY, clean_path=limpo, rejects_path=rejeitos)
+    generate.write_dirty_dataset(bruto)
+    pipeline.run(TODAY, raw_path=bruto, clean_path=limpo, rejects_path=rejeitos)
 
+    assert bruto.read_bytes() == pipeline.RAW_PATH.read_bytes()
     assert limpo.read_bytes() == pipeline.CLEAN_PATH.read_bytes()
     assert rejeitos.read_bytes() == pipeline.REJECTS_PATH.read_bytes()
