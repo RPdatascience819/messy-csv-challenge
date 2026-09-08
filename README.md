@@ -20,7 +20,7 @@ prova: o primeiro commit contém apenas a spec de design, o segundo o ambiente, 
 terceiro as barreiras de qualidade — ruff, mypy strict, pre-commit e CI — **antes
 do primeiro módulo de domínio**. Uma barreira instalada depois só reprova código
 que já existe, e a tentação passa a ser afrouxar a barreira em vez de consertar o
-código. Instalada antes, ela nunca teve nada a perdoar.
+código. 
 
 Os dois documentos que geraram tudo estão versionados:
 
@@ -122,7 +122,7 @@ essa inversão.](tests/test_pipeline.py)
 **Transformadores não rejeitam; o contrato rejeita.** Cada módulo de `clean/`
 transforma e nada mais. `contract.py` é o único lugar onde "limpo" está definido.
 Se a regra de aceitação estivesse espalhada pelos seis, mudá-la significaria
-caçar seis arquivos e torcer.
+procurar seis arquivos.
 
 **Quarentena, não descarte.** Linha que viola o contrato vai para
 `rejects.csv` com o motivo, gravada exatamente como chegou. Um pipeline que
