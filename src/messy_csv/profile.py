@@ -116,7 +116,7 @@ def profile(view: pl.DataFrame, today: dt.date) -> ProfileResult:
     return ProfileResult(
         rows=linhas,
         completeness=preenchidas / (linhas * len(VIEW_COLUMNS)),
-        uniqueness=enriquecido["order_id"].drop_nulls().n_unique() / linhas,
+        uniqueness=enriquecido["order_id"].drop_nulls().str.strip_chars().n_unique() / linhas,
         temporal_validity=datas_validas / linhas,
         category_consistency=int(enriquecido["_category_ok"].sum()) / linhas,
         currency_normalization=int(enriquecido["_amount"].is_not_null().sum()) / linhas,
